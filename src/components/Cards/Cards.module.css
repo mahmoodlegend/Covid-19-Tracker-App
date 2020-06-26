@@ -1,2 +1,20 @@
 /* Normally its name should be Cards.css But as I mention 
 Cards.module.css it stop this css file interfear all other things */
+.container{
+    margin: 50px 0;
+}
+
+.card{
+    margin: 0 2% !important;
+}
+
+.infected{
+    border-bottom: 10px solid rgba(0, 0, 255, 0.5);       /* 0.5 is opacity */
+}
+
+.recovered{
+    border-bottom: 10px solid rgba(0, 225, 0, 0.5)
+}
+.deaths{
+    border-bottom: 10px solid rgba(255, 0, 0, 0.5)
+}

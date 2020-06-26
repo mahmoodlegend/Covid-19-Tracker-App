@@ -27,7 +27,7 @@ class App extends React.Component {
     async componentDidMount() {
         const fetchedData = await fetchData();    // fetchedData word give sense that data is coming in this variable
         
-        this.setState({data:fetchData});    // data:data can be written as only data in JS as key value pair are same but just for clearity     
+        this.setState({data:fetchedData});    // data:data can be written as only data in JS as key value pair are same but just for clearity     
     }
 
     render() {
@@ -35,7 +35,7 @@ class App extends React.Component {
         const { data } = this.state;
 
         return (
-            <div div className={styles.container}>
+            <div className={styles.container}>
                 {/* Same as className = container  , It make sure that you not have interface fromany other file  */}
                 <Cards data = {data} />        {/* We pass all data to card Function */}
                 <CountryPicker />

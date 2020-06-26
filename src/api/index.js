@@ -29,8 +29,6 @@ export const fetchData = async () => {            // async is most last methods 
 
             return modifieddata;
          
-        
-         
     } catch (error) {
 
     }
