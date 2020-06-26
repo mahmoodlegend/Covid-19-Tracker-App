@@ -17,6 +17,7 @@ import { fetchData } from './api/index.js';
 // 2) react-chartjs-2 for making chart
 // 3) react-countup for making number count for animation
 // 4) @material-ui/core
+// 5) chart.js is for making chart and it's wrapper is react-chartjs-2
 class App extends React.Component {
        
         state = {                      // Now we are sending data to cards so that make UI with this data

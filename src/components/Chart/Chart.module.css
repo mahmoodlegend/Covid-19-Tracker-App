@@ -1,2 +1,8 @@
 /* Normally its name should be Chart.css But as I mention 
 Chart.module.css it stop this css file interfear all other things */
+
+.container{
+    display: flex;
+    justify-content: center;
+    width: 80%
+}

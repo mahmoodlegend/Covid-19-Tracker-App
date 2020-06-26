@@ -21,15 +21,31 @@ export const fetchData = async () => {            // async is most last methods 
         //         deaths: deaths,
         //         lastUpdate: lastUpdate,
         //     }  
-        
+
         //###############Most Simplified ###########################
 
-        const { data:{confirmed, recovered, deaths, lastUpdate} } = await axios.get(url);
-         const modifieddata = {confirmed,recovered,deaths,lastUpdate,}   
+        const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(url);
+        return { confirmed, recovered, deaths, lastUpdate };
 
-            return modifieddata;
-         
     } catch (error) {
-
+        return error;
     }
-}
+};
+// As for chart we need daily Data
+
+export const fetchDailyData = async () => {
+    try {
+        const { data } = await axios.get(`${url}/daily`);       // `${url}/daily` mean As we are getting second part of data
+
+        const modifiedData = data.map((dailyData) => ({
+            confirmed: dailyData.confirmed.total,
+            deaths: dailyData.deaths.total,
+            date: dailyData.reportDate,
+        }))
+        return modifiedData;
+    }
+
+    catch (error) {
+        return error;
+    }
+};
