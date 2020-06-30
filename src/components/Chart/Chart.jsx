@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styles from './Chart.module.css';
 import { fetchDailyData } from '../../api';
 import { Line, Bar } from 'react-chartjs-2';
-
-const Chart = () => {
-    const [dailyData, setDailyData] = useState([]);     // {} is initial value known as empty object  Its wrong better is to put [] empty array
+                        // because we destructure data as {data: {confirmed,recovered,deaths}  so no further need data.confirmed just write confirmed in this function
+const Chart = ({data: {confirmed,recovered,deaths}, country}) => {                  // {data, country} represent country data for Chart
+    const [dailyData, setDailyData] = useState([]);     // {} is initial value known as empty object  Its wrong better is to put [] empty array    dailyData is for Chart golbalData
 
     useEffect(() => {                       // async can't work on top of useEffect , We will Put it inside
         const fetchAPI = async () => {
@@ -12,7 +12,7 @@ const Chart = () => {
         }
 
         fetchAPI();                     // Self Calling Function
-    });
+    }, []);                 // Problem Was values Keep coming not stop so [] meant to hold on value until complete
 
     const lineChart = (                    // Line for global view & Bar for country Wise view * to make this work nned to import line chart from react chart API
         dailyData.length                          // dailyData[0] replaced
@@ -36,9 +36,35 @@ const Chart = () => {
 
                 />) : null
     );
+
+    const barChart = (
+        confirmed                       // data.confirmed replaced with confirmed
+        ? (
+            <Bar
+            data={{     // First {} for making code dynamic  Second {} for creating an object
+                labels : ['Infected', 'Recovered', 'Deaths'],
+                datasets : [{
+                    label: 'People',
+                    backgroundColor: [              // This is Array and colors are being selected index wise
+                        'rgba(0, 0, 225, 0.5)',
+                        'rgba(0, 225, 0, 0.5)',
+                        `rgba(225, 0, 0, 0.5)`,
+                    ],
+                    data: [confirmed.value, recovered.value, deaths.value]   // Data was not Showing on Chart as confirmed, recovered, deaths does not gives values
+                }]
+            }}  
+            options={{
+                legend:{display : false},         //because we dont want legend to appear
+                title: { display: true, text: `Current State in ${country}`}
+            }}       
+            
+            /> 
+        ) : null
+    );
+
     return (
         <div className={styles.container}>
-            {lineChart}
+             {country? barChart : lineChart}                                    {/* {lineChart} Replaced now if country avaiable show barChart otherwise show lineChart*/}
         </div>
     )
 }
