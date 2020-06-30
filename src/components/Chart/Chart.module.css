@@ -6,3 +6,9 @@ Chart.module.css it stop this css file interfear all other things */
     justify-content: center;
     width: 80%
 }
+
+@media(max-width: 770px){
+    .container{
+        width: 100% !important;
+    }
+}
